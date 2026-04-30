@@ -24,7 +24,7 @@ app.post('/webhook', async (req, res) => {
         'Authorization': `Bearer ${OPENCLAW_TOKEN}`
       },
       body: JSON.stringify({
-        model: 'openai/gpt-4o-mini',
+        model: 'openai/gpt-5.1-codex',
         messages: conversations[sender]
       })
     });
