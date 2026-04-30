@@ -24,12 +24,16 @@ app.post('/webhook', async (req, res) => {
         'Authorization': `Bearer ${OPENCLAW_TOKEN}`
       },
       body: JSON.stringify({
-        model: 'openai/gpt-5.1-codex',
+        model: 'openai/gpt-4o-mini',
         messages: conversations[sender]
       })
     });
 
-    const data = await response.json();
+    const rawText = await response.text();
+    console.log('OpenClaw status:', response.status);
+    console.log('OpenClaw response:', rawText);
+
+    const data = JSON.parse(rawText);
     const reply = data.choices[0].message.content;
 
     conversations[sender].push({ role: 'assistant', content: reply });
